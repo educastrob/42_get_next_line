@@ -6,7 +6,7 @@
 /*   By: edcastro <edcastro@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 21:14:51 by edcastro          #+#    #+#             */
-/*   Updated: 2023/06/15 13:03:50 by edcastro         ###   ########.fr       */
+/*   Updated: 2023/06/15 13:40:42 by edcastro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,22 @@ static char	*ft_buffer_read(int fd, char *buffer)
 	temp = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (temp == NULL)
 		return (NULL);
-	while (i)
+	while ((ft_strchr(buffer, '\n') == NULL))
 	{
 		i = read(fd, temp, BUFFER_SIZE);
 		if (i == -1 || i == 0)
 			break ;
 		temp[i] = '\0';
 		buffer = ft_strjoin(buffer, temp);
-		// if (buffer == NULL)
-		// {
-		// 	free(temp);
-		// 	return (NULL);
-		// }
-		if ((ft_strchr(buffer, '\n')))
-			break;
+		if (buffer == NULL)
+		{
+			free(temp);
+			return (NULL);
+		}
 	}
-	// free(temp);
-	// if (i == -1)
-	// 	return (NULL);
+	free(temp);
+	if (i == -1)
+		return (NULL);
 	return (buffer);
 }
 
@@ -115,47 +113,47 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-#include <stdio.h>
-#include <fcntl.h>
-int main(int argc, char *argv[])
-{
-    int fd;
-    char *line;
+// #include <stdio.h>
+// #include <fcntl.h>
+// int main(int argc, char *argv[])
+// {
+//     int fd;
+//     char *line;
     
-    if (argc != 2)
-        return (0);
-    fd = open(argv[1], O_RDONLY);
-    if (fd < 0)
-        return (-1);
+//     if (argc != 2)
+//         return (0);
+//     fd = open(argv[1], O_RDONLY);
+//     if (fd < 0)
+//         return (-1);
 
 
-    line = get_next_line(fd);
-    printf("fd: %s", line);
-    free(line);
+//     line = get_next_line(fd);
+//     printf("fd: %s", line);
+//     free(line);
     
-    line = get_next_line(fd);
-    printf("fd: %s", line);
-    free(line);
+//     line = get_next_line(fd);
+//     printf("fd: %s", line);
+//     free(line);
     
-    line = get_next_line(fd);
-    printf("fd: %s", line);
-    free(line);
+//     line = get_next_line(fd);
+//     printf("fd: %s", line);
+//     free(line);
 
-    line = get_next_line(fd);
-    printf("fd: %s", line);
-    free(line);
+//     line = get_next_line(fd);
+//     printf("fd: %s", line);
+//     free(line);
 
-    line = get_next_line(fd);
-    printf("fd: %s", line);
-    free(line);
-    //while (i <= 30)
-    // {
-        // printf("%d - %s", i, line);
-        //  free(line);
-        // if (line == NULL)
-            // printf("\n");
-        // line = get_next_line(fd);
-        // i++;
-    // }
-    close(fd);
-}
+//     line = get_next_line(fd);
+//     printf("fd: %s", line);
+//     free(line);
+//     //while (i <= 30)
+//     // {
+//         // printf("%d - %s", i, line);
+//         //  free(line);
+//         // if (line == NULL)
+//             // printf("\n");
+//         // line = get_next_line(fd);
+//         // i++;
+//     // }
+//     close(fd);
+// }
