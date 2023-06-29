@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: eduardo <eduardo@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/14 21:14:51 by edcastro          #+#    #+#             */
-/*   Updated: 2023/06/29 03:24:42 by eduardo          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "get_next_line.h"
 
 static char	*ft_strchr(const char *s, int c)
@@ -111,16 +99,16 @@ static char	*go_to_next_line(char *buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffer[1024];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer = ft_buffer_read(fd, buffer);
-	if (!buffer)
+	buffer[fd] = ft_buffer_read(fd, buffer[fd]);
+	if (!buffer[fd])
 		return (NULL);
-	line = ft_get_line(buffer);
-	buffer = go_to_next_line(buffer);
+	line = ft_get_line(buffer[fd]);
+	buffer[fd] = go_to_next_line(buffer[fd]);
 	return (line);
 }
 
