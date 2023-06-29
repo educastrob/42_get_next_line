@@ -45,16 +45,12 @@ static char	*ft_get_line(char *buffer)
 	size_t	i;
 	char	*line;
 
-	line = NULL;
 	i = 0;
 	if (buffer[i] == '\0')
 		return (NULL);
 	while (buffer[i] != '\0' && buffer[i] != '\n')
 		i++;
-	if (buffer[i] == '\0')
-		line = malloc((buffer[i] + 1) * sizeof(char));
-	else if (buffer[i] == '\n')
-		line = malloc((buffer[i] + 2) * sizeof(char));
+	line = malloc((i + (buffer[i] == '\n') + 1) * sizeof(char));
 	if (line == NULL)
 		return (NULL);
 	i = 0;
@@ -89,6 +85,7 @@ static char	*go_to_next_line(char *buffer)
 	next = malloc((ft_strlen(buffer) - i + 1) * sizeof(char));
 	if (next == NULL)
 		return (NULL);
+	i++;
 	while ((buffer[i + j]) != '\0')
 	{
 		next[j] = buffer[i + j];
@@ -146,14 +143,14 @@ char	*get_next_line(int fd)
 //     line = get_next_line(fd);
 //     printf("fd: %s", line);
 //     free(line);
-//     //while (i <= 30)
-//     // {
-//         // printf("%d - %s", i, line);
-//         //  free(line);
-//         // if (line == NULL)
-//             // printf("\n");
-//         // line = get_next_line(fd);
-//         // i++;
-//     // }
+//     while (i <= 30)
+//     {
+//         printf("%d - %s", i, line);
+//          free(line);
+//         if (line == NULL)
+//             printf("\n");
+//         line = get_next_line(fd);
+//         i++;
+//     }
 //     close(fd);
 // }
