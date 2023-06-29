@@ -1,4 +1,4 @@
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*ft_strchr(const char *s, int c)
 {
@@ -112,21 +112,20 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-// #include <stdio.h>
-// #include <fcntl.h>
-// #include "get_next_line.h"
+#include <stdio.h>
+#include <fcntl.h>
 
-// int	main()
-// {
-// 	int		fd;
-// 	char	*line;
+int	main()
+{
+	int		fd;
+	char	*line;
 
-// 	fd = open("texto.txt", O_RDONLY);
-// 	while ((line = get_next_line(fd)) != NULL)
-// 	{
-// 		printf("%s\n", line);
-// 		free(line);
-// 	}
-// 	close(fd);
-// 	return (0);
-// }
+	fd = open("texto.txt", O_RDONLY);
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		printf("%s\n", line);
+		free(line);
+	}
+	close(fd);
+	return (0);
+}
