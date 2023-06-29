@@ -60,10 +60,8 @@ static char	*ft_get_line(char *buffer)
 		i++;
 	}
 	if (buffer[i] == '\n')
-	{
-		line[i] = '\n';
-		i++;
-	}
+		line[i++] = '\n';
+	line[i] = '\0';
 	return (line);
 }
 
@@ -83,7 +81,7 @@ static char	*go_to_next_line(char *buffer)
 		return (NULL);
 	}
 	next = malloc((ft_strlen(buffer) - i + 1) * sizeof(char));
-	if (next == NULL)
+	if (!next)
 		return (NULL);
 	i++;
 	while ((buffer[i + j]) != '\0')
@@ -91,6 +89,7 @@ static char	*go_to_next_line(char *buffer)
 		next[j] = buffer[i + j];
 		j++;
 	}
+	next[j] = '\0';
 	free(buffer);
 	return (next);
 }
