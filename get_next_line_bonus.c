@@ -6,7 +6,7 @@
 /*   By: edcastro <edcastro@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 20:23:41 by edcastro          #+#    #+#             */
-/*   Updated: 2023/06/29 20:35:06 by edcastro         ###   ########.fr       */
+/*   Updated: 2023/06/30 00:51:52 by edcastro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,21 +126,3 @@ char	*get_next_line(int fd)
 	buffer[fd] = go_to_next_line(buffer[fd]);
 	return (line);
 }
-
-// #include <stdio.h>
-// #include <fcntl.h>
-
-// int	main()
-// {
-// 	int		fd;
-// 	char	*line;
-
-// 	fd = open("texto.txt", O_RDONLY);
-// 	while ((line = get_next_line(fd)) != NULL)
-// 	{
-// 		printf("%s\n", line);
-// 		free(line);
-// 	}
-// 	close(fd);
-// 	return (0);
-// }
