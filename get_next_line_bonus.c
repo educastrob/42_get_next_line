@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: edcastro <edcastro@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/29 20:23:41 by edcastro          #+#    #+#             */
+/*   Updated: 2023/06/29 20:35:06 by edcastro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line_bonus.h"
 
 static char	*ft_strchr(const char *s, int c)
@@ -106,26 +118,29 @@ char	*get_next_line(int fd)
 		return (NULL);
 	buffer[fd] = ft_buffer_read(fd, buffer[fd]);
 	if (!buffer[fd])
+	{
+		free(buffer[fd]);
 		return (NULL);
+	}
 	line = ft_get_line(buffer[fd]);
 	buffer[fd] = go_to_next_line(buffer[fd]);
 	return (line);
 }
 
-#include <stdio.h>
-#include <fcntl.h>
+// #include <stdio.h>
+// #include <fcntl.h>
 
-int	main()
-{
-	int		fd;
-	char	*line;
+// int	main()
+// {
+// 	int		fd;
+// 	char	*line;
 
-	fd = open("texto.txt", O_RDONLY);
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		printf("%s\n", line);
-		free(line);
-	}
-	close(fd);
-	return (0);
-}
+// 	fd = open("texto.txt", O_RDONLY);
+// 	while ((line = get_next_line(fd)) != NULL)
+// 	{
+// 		printf("%s\n", line);
+// 		free(line);
+// 	}
+// 	close(fd);
+// 	return (0);
+// }

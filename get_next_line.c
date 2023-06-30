@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eduardo <eduardo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: edcastro <edcastro@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 21:14:51 by edcastro          #+#    #+#             */
-/*   Updated: 2023/06/29 03:24:42 by eduardo          ###   ########.fr       */
+/*   Updated: 2023/06/30 00:35:50 by edcastro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ static char	*ft_strchr(const char *s, int c)
 
 static char	*ft_buffer_read(int fd, char *buffer)
 {
-	char	*temp;
-	int		i;
+	char		*temp;
+	ssize_t		i;
 
 	i = 0;
 	temp = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (temp == NULL)
+	if (!temp)
 		return (NULL);
 	while ((ft_strchr(buffer, '\n') == NULL))
 	{
@@ -43,7 +43,7 @@ static char	*ft_buffer_read(int fd, char *buffer)
 			break ;
 		temp[i] = '\0';
 		buffer = ft_strjoin(buffer, temp);
-		if (buffer == NULL)
+		if (!buffer)
 		{
 			free(temp);
 			return (NULL);
@@ -61,6 +61,8 @@ static char	*ft_get_line(char *buffer)
 	char	*line;
 
 	i = 0;
+	if (!buffer)
+		return (NULL);
 	if (buffer[i] == '\0')
 		return (NULL);
 	while (buffer[i] != '\0' && buffer[i] != '\n')
@@ -99,11 +101,8 @@ static char	*go_to_next_line(char *buffer)
 	if (!next)
 		return (NULL);
 	i++;
-	while ((buffer[i + j]) != '\0')
-	{
-		next[j] = buffer[i + j];
-		j++;
-	}
+	while ((buffer[i]) != '\0')
+		next[j++] = buffer[i++];
 	next[j] = '\0';
 	free(buffer);
 	return (next);
@@ -114,7 +113,7 @@ char	*get_next_line(int fd)
 	static char	*buffer;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd == -1 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buffer = ft_buffer_read(fd, buffer);
 	if (!buffer)
