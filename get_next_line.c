@@ -6,7 +6,7 @@
 /*   By: edcastro <edcastro@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 21:14:51 by edcastro          #+#    #+#             */
-/*   Updated: 2023/06/30 00:51:42 by edcastro         ###   ########.fr       */
+/*   Updated: 2023/07/04 15:37:38 by edcastro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static char	*ft_get_line(char *buffer)
 	while (buffer[i] != '\0' && buffer[i] != '\n')
 		i++;
 	line = malloc((i + (buffer[i] == '\n') + 1) * sizeof(char));
-	if (line == NULL)
+	if (!line)
 		return (NULL);
 	i = 0;
 	while (buffer[i] != '\0' && buffer[i] != '\n')
@@ -101,7 +101,7 @@ static char	*go_to_next_line(char *buffer)
 	if (!next)
 		return (NULL);
 	i++;
-	while ((buffer[i]) != '\0')
+	while (buffer[i] != '\0')
 		next[j++] = buffer[i++];
 	next[j] = '\0';
 	free(buffer);

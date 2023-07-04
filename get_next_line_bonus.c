@@ -6,7 +6,7 @@
 /*   By: edcastro <edcastro@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 20:23:41 by edcastro          #+#    #+#             */
-/*   Updated: 2023/06/30 00:51:52 by edcastro         ###   ########.fr       */
+/*   Updated: 2023/07/04 15:37:50 by edcastro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*ft_buffer_read(int fd, char *buffer)
 
 	i = 0;
 	temp = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (temp == NULL)
+	if (!temp)
 		return (NULL);
 	while ((ft_strchr(buffer, '\n') == NULL))
 	{
@@ -43,7 +43,7 @@ static char	*ft_buffer_read(int fd, char *buffer)
 			break ;
 		temp[i] = '\0';
 		buffer = ft_strjoin(buffer, temp);
-		if (buffer == NULL)
+		if (!buffer)
 		{
 			free(temp);
 			return (NULL);
@@ -66,7 +66,7 @@ static char	*ft_get_line(char *buffer)
 	while (buffer[i] != '\0' && buffer[i] != '\n')
 		i++;
 	line = malloc((i + (buffer[i] == '\n') + 1) * sizeof(char));
-	if (line == NULL)
+	if (!line)
 		return (NULL);
 	i = 0;
 	while (buffer[i] != '\0' && buffer[i] != '\n')
@@ -99,7 +99,7 @@ static char	*go_to_next_line(char *buffer)
 	if (!next)
 		return (NULL);
 	i++;
-	while ((buffer[i + j]) != '\0')
+	while (buffer[i + j] != '\0')
 	{
 		next[j] = buffer[i + j];
 		j++;
@@ -114,7 +114,7 @@ char	*get_next_line(int fd)
 	static char	*buffer[1024];
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd < 1024)
 		return (NULL);
 	buffer[fd] = ft_buffer_read(fd, buffer[fd]);
 	if (!buffer[fd])
