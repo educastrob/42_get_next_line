@@ -61,7 +61,7 @@
 
 ---
 
-# How to Execute
+## How to Execute
 
 First, clone this repository and `cd` into it:
 
