@@ -10,8 +10,6 @@
 
 ## The Project
 
----
-
 <h3>Mandatory</h3>
 <p>Write a function that will read a line at a time from a file opened.</p>
 <table>
